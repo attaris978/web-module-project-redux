@@ -50,16 +50,16 @@ const Movie = (props) => {
               </section>
 
               <section>
-                <span
+                {props.displayFavorites ? <span
                   className="m-2 btn btn-dark"
                   onClick={(e) => {
-                    console.log(props.favorites, +id);
+                    
                     if (props.favorites.filter( mov => mov.id === +id).length === 0) {
                     props.addFavorite(movie);
                   }}}
                 >
                   Favorite
-                </span>
+                </span> : null}
                 <Link to="/">
                   <span className="delete">
                     <input
@@ -86,7 +86,8 @@ const Movie = (props) => {
 const mapStateToProps = (state) => {
   return {
     movies: state.movies.movies,
-    favorites: state.favorites.favorites
+    favorites: state.favorites.favorites,
+    displayFavorites: state.favorites.displayFavorites
   };
 };
 export default connect(mapStateToProps, { deleteMovie, addFavorite })(Movie);

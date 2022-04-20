@@ -5,9 +5,9 @@ import {removeFavorite} from './../actions/favoritesActions';
 
 
 const FavoriteMovieList = (props) => {
-    const {favorites} = props;
+    const {favorites, displayFavorites} = props;
     
-    return (<div className="col-xs savedContainer">
+    return displayFavorites ? (<div className="col-xs savedContainer">
         <h5>Favorite Movies</h5>
         {
             favorites.map(movie=>{
@@ -28,12 +28,13 @@ const FavoriteMovieList = (props) => {
                 </div>
             })
         }
-    </div>);
+    </div>) : null;
 }
 
 const mapStateToProps = state => {
     return {
-    favorites: state.favorites.favorites
+    favorites: state.favorites.favorites,
+    displayFavorites: state.favorites.displayFavorites
     }
 }
 export default connect(mapStateToProps,{removeFavorite})(FavoriteMovieList);
